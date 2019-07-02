@@ -1,0 +1,12 @@
+sourceCompatibility = project.javaVersion
+targetCompatibility = project.javaVersion
+
+compileJava {
+	options.encoding = project.defaultEncoding
+	options.compilerArgs += ["-Xlint:-options"]
+}
+
+compileTestJava {
+	options.encoding = project.defaultEncoding
+	options.compilerArgs += ["-Xlint:-options"]
+}
