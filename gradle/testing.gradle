@@ -1,0 +1,14 @@
+test {
+	useTestNG()
+	
+	testLogging {
+		exceptionFormat "full"
+		events "skipped", "failed"
+	}
+}
+
+jacocoTestReport {
+	reports {
+        xml.enabled = true // for coveralls check jacoco xml report should be turned on
+    }
+}
