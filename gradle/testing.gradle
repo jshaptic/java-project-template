@@ -5,10 +5,15 @@ test {
 		exceptionFormat "full"
 		events "skipped", "failed"
 	}
+	
+	// Rearrange test classpath and add compiled JAR
+	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 }
 
 jacocoTestReport {
 	reports {
-        xml.enabled = true // for coveralls check jacoco xml report should be turned on
+		
+		// For coveralls task jacoco xml report should be turned on
+		xml.enabled = true
     }
 }
