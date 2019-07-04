@@ -1,8 +1,5 @@
 test {
 	
-	// Add dependency on jar task, since testing will be executed against freshly made JAR file
-	dependsOn jar
-	
 	// Rearrange test classpath, add compiled JAR instead of main classes
 	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 	
