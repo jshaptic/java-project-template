@@ -1,13 +1,17 @@
 test {
+	
+	// Add dependency on jar task, since testing will be executed against freshly made JAR file
+	dependsOn jar
+	
+	// Rearrange test classpath, add compiled JAR instead of main classes
+	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
+	
 	useTestNG()
 	
 	testLogging {
 		exceptionFormat "full"
 		events "skipped", "failed"
 	}
-	
-	// Rearrange test classpath and add compiled JAR
-	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 }
 
 jacocoTestReport {
