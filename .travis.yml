@@ -1,12 +1,14 @@
 language: java
 jdk: oraclejdk11
-sudo: false
 
 stages:
   - build
   - test
   - publish
   - release
+  
+before_install:
+  - chmod +x gradlew
 
 # Stop all services to free some memory space
 before_script:
