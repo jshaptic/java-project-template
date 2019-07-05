@@ -13,7 +13,7 @@ jobs:
      script: ./gradlew jar
 
 # Stop all services to free some memory space
-before_install:
+before_script:
   - sudo service postgresql stop || true
   - sudo service mysql stop || true
   - sudo service memcached stop || true
