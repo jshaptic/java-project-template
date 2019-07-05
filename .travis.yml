@@ -1,19 +1,7 @@
 language: java
-jdk: oraclejdk11
-
-stages:
-  - build
-  - test
-  - publish
-  - release
-
-jobs:
-  include:
-    - stage: build
-      install: skip
-      script: ./gradlew jar
-    - stage: test
-      script: ./gradlew check
+jdk:
+  - oraclejdk11
+  - oraclejdk8
 
 # Stop all services to free some memory space
 before_install:
