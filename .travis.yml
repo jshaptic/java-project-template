@@ -10,7 +10,10 @@ stages:
 jobs:
   include:
     - stage: build
+      install: skip
       script: ./gradlew jar
+    - stage: test
+      script: ./gradlew check
 
 # Stop all services to free some memory space
 before_install:
