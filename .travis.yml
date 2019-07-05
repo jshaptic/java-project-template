@@ -8,8 +8,9 @@ stages:
   - release
 
 jobs:
-  -stage: build
-   script: ./gradlew jar
+  include:
+    -stage: build
+     script: ./gradlew jar
 
 # Stop all services to free some memory space
 before_install:
