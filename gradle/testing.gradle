@@ -13,7 +13,7 @@ test {
 
 check {
 	doFirst {
-		println org.gradle.internal.jvm.Jvm.current()
+		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
 	}
 }
 
