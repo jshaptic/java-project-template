@@ -4,7 +4,7 @@ jdk: oraclejdk11
 addons:
   apt:
     packages:
-      - oracle-java8-installer
+      - openjdk-8-jre-headless
 
 # Stop all unused services to free some memory space
 before_install:
