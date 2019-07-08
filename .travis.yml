@@ -1,6 +1,11 @@
 language: java
 jdk: oraclejdk11
 
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
 # Stop all unused services to free some memory space
 before_install:
   - sudo service postgresql stop || true
