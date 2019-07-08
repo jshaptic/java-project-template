@@ -1,10 +1,6 @@
 language: java
 jdk: oraclejdk11
-
-addons:
-  apt:
-    packages:
-      - openjdk-8-jre-headless
+dist: trusty
 
 # Stop all unused services to free some memory space
 before_install:
