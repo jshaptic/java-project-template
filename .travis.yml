@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk11
+jdk: openjdk11
 dist: trusty
 
 # Stop all unused services to free some memory space
@@ -17,17 +17,13 @@ before_install:
   - sudo service x11-common stop || true
   
 script:
-  - java -version && ./gradlew check -x jar -x classes
-  
-  - export JAVA_HOME=$HOME/openjdk11
-  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
-  - java -version && ./gradlew check -x jar -x classes
+  - ./gradlew check -x jar -x classes
   
   - jdk_switcher use oraclejdk8
-  - java -version && ./gradlew check -x jar -x classes
+  - ./gradlew check -x jar -x classes
   
   - jdk_switcher use openjdk8
-  - java -version && ./gradlew check -x jar -x classes
+  - ./gradlew check -x jar -x classes
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
