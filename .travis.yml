@@ -17,13 +17,13 @@ before_install:
   - sudo service x11-common stop || true
   
 script:
-  - ./gradlew check -x jar -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
   
   - jdk_switcher use oraclejdk8
-  - ./gradlew check -x jar -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
   
   - jdk_switcher use openjdk8
-  - ./gradlew check -x jar -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
