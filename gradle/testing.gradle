@@ -11,6 +11,12 @@ test {
 	}
 }
 
+check {
+	doFirst {
+		println org.gradle.internal.jvm.Jvm.current()
+	}
+}
+
 jacocoTestReport {
 	reports {
 		
