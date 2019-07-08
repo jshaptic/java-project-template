@@ -1,9 +1,7 @@
 language: java
-jdk:
-  - oraclejdk11
-  - oraclejdk8
+jdk: oraclejdk11
 
-# Stop all services to free some memory space
+# Stop all unused services to free some memory space
 before_install:
   - sudo service postgresql stop || true
   - sudo service mysql stop || true
@@ -16,6 +14,15 @@ before_install:
   - sudo service riak stop || true
   - sudo service rsync stop || true
   - sudo service x11-common stop || true
+  
+script:
+  - ./gradlew check -x jar
+  - jdk_switcher use openjdk11
+  - ./gradlew check -x jar
+  - jdk_switcher use oraclejdk8
+  - ./gradlew check -x jar
+  - jdk_switcher use openjdk8
+  - ./gradlew check -x jar
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
