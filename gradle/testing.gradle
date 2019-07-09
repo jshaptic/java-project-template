@@ -6,7 +6,7 @@ test {
 
 // Custom test task for JAR testing
 task testDeliverable(type: Test, group: 'verification') {
-	
+	useTestNG()
 	// Print Java runtime version
 	doFirst {
 		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
@@ -16,9 +16,9 @@ task testDeliverable(type: Test, group: 'verification') {
 	classpath = sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 	
 	// Turn off jacoco
-	jacoco {
+	/*jacoco {
 		enabled = false
-	}
+	}*/
 	
 	// Setup logging
 	testLogging {
@@ -27,15 +27,15 @@ task testDeliverable(type: Test, group: 'verification') {
 	}
 }
 
-// Setup jacoco task, it should depend on 'test' task and reports should be generated in XML format,
-// which is required by coveralls task
+// Setup jacoco task
+// It should depend on 'test' task and reports should be generated in XML format, which is required by coveralls task
 jacocoTestReport {
-	dependsOn test
+	//dependsOn test
 	reports {
 		xml.enabled = true
     }
 }
 
-coveralls {
+/*coveralls {
 	sourceDirs = files(sourceSets.main.java.srcDirs).files.absolutePath
-}
+}*/

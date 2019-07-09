@@ -23,7 +23,7 @@ before_install:
 # TEST STAGE
 script:
   # test with openjdk11
-  - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
+  - ./gradlew test jacocoTestReport coveralls --rerun-tasks -x jar -x classes
   
   # test with openjdk8
   - jdk_switcher use openjdk8
@@ -34,9 +34,9 @@ script:
   - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
   
 # CODECHECK STAGE
-after_success:
-  - export JAVA_HOME=$HOME/openjdk11
-  - ./gradlew jacocoTestReport coveralls
+# after_success:
+#  - export JAVA_HOME=$HOME/openjdk11
+#  - ./gradlew jacocoTestReport coveralls
   
 # DEPLOY STAGE
 
