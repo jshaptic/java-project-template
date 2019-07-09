@@ -13,7 +13,7 @@ task testDeliverable(type: Test, group: 'verification') {
 	}
 	
 	// Rearrange test classpath, add compiled JAR instead of main classes
-	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
+	classpath = sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 	
 	// Turn off jacoco
 	jacoco {
@@ -34,4 +34,8 @@ jacocoTestReport {
 	reports {
 		xml.enabled = true
     }
+}
+
+coveralls {
+	sourceDirs = files(sourceSets.main.java.srcDirs).files.absolutePath
 }
