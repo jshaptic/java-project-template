@@ -23,17 +23,17 @@ before_install:
 # TEST STAGE
 script:
   # test with openjdk11
-  - ./gradlew testDeliverable jacocoTestReport --rerun-tasks -x jar -x classes
+  - ./gradlew check jacocoTestReport --rerun-tasks -x jar -x classes
   - cat build/reports/jacoco/test/*.xml
   
   # test with openjdk8
   - jdk_switcher use openjdk8
-  - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
   - cat build/reports/jacoco/test/*.xml
   
   # test with oraclejdk8
   - jdk_switcher use oraclejdk8
-  - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
   - cat build/reports/jacoco/test/*.xml
   
 # CODECHECK STAGE

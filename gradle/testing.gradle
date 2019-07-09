@@ -1,24 +1,9 @@
-// Default test task is used for code coverage only
 test {
-	useTestNG()
-	ignoreFailures = true
-}
-
-// Custom test task for JAR testing
-task testDeliverable(type: Test, group: 'verification') {
-	useTestNG()
-	// Print Java runtime version
-	doFirst {
-		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
-	}
+	// Rearrange test classpath, add compiled JAR instead of main classes directory
+	classpath = project.sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
 	
-	// Rearrange test classpath, add compiled JAR instead of main classes
-	classpath = sourceSets.test.output + configurations.testRuntimeClasspath + files(jar.archiveFile)
-	
-	// Turn off jacoco
-	/*jacoco {
-		enabled = false
-	}*/
+	// Select testing framework
+	useTestNG()
 	
 	// Setup logging
 	testLogging {
@@ -27,15 +12,16 @@ task testDeliverable(type: Test, group: 'verification') {
 	}
 }
 
-// Setup jacoco task
-// It should depend on 'test' task and reports should be generated in XML format, which is required by coveralls task
+// Print Java runtime version during deliverable verification
+check {
+	doFirst {
+		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
+	}
+}
+
+// Setup jacoco task, reports should be generated in XML format, which is required for codecov task
 jacocoTestReport {
-	//dependsOn test
 	reports {
 		xml.enabled = true
     }
 }
-
-/*coveralls {
-	sourceDirs = files(sourceSets.main.java.srcDirs).files.absolutePath
-}*/
