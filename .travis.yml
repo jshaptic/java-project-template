@@ -33,9 +33,9 @@ script:
   - jdk_switcher use oraclejdk8
   - ./gradlew check --rerun-tasks -x jar -x classes
   
-# CODECHECK STAGE
+
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
   
 # DEPLOY STAGE
 
