@@ -35,7 +35,7 @@ script:
   
 # CODECHECK STAGE
 after_success:
-  - jdk_switcher use openjdk11
+  - export JAVA_HOME=$HOME/openjdk11
   - ./gradlew jacocoTestReport coveralls
   
 # DEPLOY STAGE
