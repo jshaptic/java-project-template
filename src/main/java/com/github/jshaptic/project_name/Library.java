@@ -7,15 +7,15 @@ import java.nio.file.Paths;
 
 public class Library
 {
-    private String resource = "some-resource.txt";
+	private String resource = "some-resource.txt";
 	
 	public boolean someLibraryMethod()
-    {
-        return true;
-    }
-    
-    public String readResourceByURI() throws IOException, URISyntaxException
-    {
-    	return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
-    }
+	{
+		return true;
+	}
+	
+	public String readResourceByURI() throws IOException, URISyntaxException
+	{
+		return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
+	}
 }
