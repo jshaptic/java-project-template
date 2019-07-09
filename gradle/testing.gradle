@@ -1,6 +1,7 @@
 // Default test task is used for code coverage only
 test {
 	useTestNG()
+	ignoreFailures = true
 }
 
 // Custom test task for JAR testing
