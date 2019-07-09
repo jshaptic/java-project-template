@@ -34,9 +34,9 @@ script:
   - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
   
 # CODECHECK STAGE
-# after_success:
+after_success:
 #  - export JAVA_HOME=$HOME/openjdk11
-#  - ./gradlew jacocoTestReport coveralls
+- ./gradlew test jacocoTestReport coveralls
   
 # DEPLOY STAGE
 
