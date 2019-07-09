@@ -17,9 +17,16 @@ public class LibraryTest extends Assert
     }
     
     @Test(expectedExceptions = FileSystemNotFoundException.class)
-    public void testReadResourceByURI() throws IOException, URISyntaxException
+    public void testReadResourceAsURI() throws IOException, URISyntaxException
     {
         Library classUnderTest = new Library();
-        assertEquals(classUnderTest.readResourceByURI(), "some data");
+        assertEquals(classUnderTest.readResourceAsURI(), "some data");
+    }
+    
+    @Test
+    public void testReadResourceAsStream() throws IOException
+    {
+        Library classUnderTest = new Library();
+        assertEquals(classUnderTest.readResourceAsStream(), "some data");
     }
 }
