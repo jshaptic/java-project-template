@@ -34,7 +34,7 @@ script:
   - ./gradlew testDeliverable --rerun-tasks -x jar -x classes
   
 # CODECHECK STAGE
-after_script:
+after_success:
   - jdk_switcher use openjdk11
   - ./gradlew jacocoTestReport coveralls
   
