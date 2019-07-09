@@ -1,3 +1,4 @@
+# CI environment
 language: java
 jdk: openjdk11
 dist: trusty
@@ -16,14 +17,25 @@ before_install:
   - sudo service rsync stop || true
   - sudo service x11-common stop || true
   
+# BUILD STAGE
+# this stage is configured automaticaly by Travis CI
+  
+# TEST STAGE
 script:
+  # test with openjdk11
+  - ./gradlew check jacocoTestReport coveralls --rerun-tasks -x jar -x classes
+  
+  # test with openjdk8
+  - jdk_switcher use openjdk8
   - ./gradlew check --rerun-tasks -x jar -x classes
   
+  # test with oraclejdk8
   - jdk_switcher use oraclejdk8
   - ./gradlew check --rerun-tasks -x jar -x classes
   
-  - jdk_switcher use openjdk8
-  - ./gradlew check --rerun-tasks -x jar -x classes
+# DEPLOY STAGE
+
+# RELEASE STAGE
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
