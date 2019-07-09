@@ -8,12 +8,13 @@ test {
 	// Setup verbosity
 	testLogging {
 		exceptionFormat "full"
-		events "skipped", "failed"
+		//events "skipped", "failed"
 	}
 }
 
 // Setup jacoco task, reports should be generated in XML format, which is required for codecov task
 jacocoTestReport {
+	dependsOn test
 	reports {
 		xml.enabled = true
     }
