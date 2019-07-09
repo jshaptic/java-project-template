@@ -5,17 +5,10 @@ test {
 	// Select testing framework
 	useTestNG()
 	
-	// Setup logging
+	// Setup verbosity
 	testLogging {
 		exceptionFormat "full"
 		events "skipped", "failed"
-	}
-}
-
-// Print Java runtime version during deliverable verification
-check {
-	doFirst {
-		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
 	}
 }
 

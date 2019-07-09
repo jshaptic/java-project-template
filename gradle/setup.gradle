@@ -17,3 +17,8 @@ ext {
 		project.ext."$property" = project.hasProperty(property) ? project.getProperty(property) : System.getenv(systemenv)
 	}
 }
+
+// Print Java runtime version
+gradle.taskGraph.whenReady {
+	println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
+}
