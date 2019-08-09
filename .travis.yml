@@ -18,26 +18,34 @@ before_install:
   - sudo service x11-common stop || true
   
 # BUILD STAGE
-# this stage is configured automaticaly by Travis CI
+# This stage is configured automaticaly by Travis CI
   
 # TEST STAGE
 script:
-  # test with openjdk11
+  # Run tests with OpenJDK 11
   - ./gradlew check jacocoTestReport --rerun-tasks -x jar -x classes
   
-  # test with openjdk8
+  # Run tests with OpenJDK 8
   - jdk_switcher use openjdk8
   - ./gradlew check --rerun-tasks -x jar -x classes
   
-  # test with oraclejdk8
+  # Run tests with OracleJDK 8
   - jdk_switcher use oraclejdk8
   - ./gradlew check --rerun-tasks -x jar -x classes
   
-
 after_success:
+  # Enable OpenJDK 11 again
+  - export JAVA_HOME=$HOME/openjdk11
+  # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
   
 # DEPLOY STAGE
+deploy:
+  provider: script
+  script: ./gradlew bintrayUpload
+  skip_cleanup: true
+  on:
+    branch: production
 
 # RELEASE STAGE
 
