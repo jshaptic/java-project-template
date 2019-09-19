@@ -42,10 +42,10 @@ after_success:
 # DEPLOY STAGE
 deploy:
   provider: script
-  script: ./gradlew bintrayUpload
+  script: ./gradlew masterDeploy
   skip_cleanup: true
   on:
-    branch: production
+    branch: master
 
 # RELEASE STAGE
 
