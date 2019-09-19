@@ -1,0 +1,19 @@
+task masterDeploy(group: "deployment") {
+	description "Publishes assembled artifacts to JFrog's OSS Artifactory"
+	if (System.env['CI'] == true && System.env['TRAVIS'] == true)
+		dependsOn artifactoryPublish
+	else 
+		doLast {
+			println "\r\n!!! This task can be run only in CI environment\r\n"
+		}
+}
+
+task productionDeploy(group: "deployment") {
+	description "Publishes production ready artifacts to Bintray repository"
+	if (System.env['CI'] == true && System.env['TRAVIS'] == true)
+		dependsOn bintrayUpload
+	else
+		doLast {
+			println "\r\n!!! This task can be run only in CI environment\r\n"
+		}
+}
