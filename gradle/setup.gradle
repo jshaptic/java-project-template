@@ -1,4 +1,7 @@
 ext {
+	// initialize vcsTag property
+	vcsTag = "v" + project.version
+	
 	// Initialize developers property
 	developers = []
 	properties.findAll{ it.key.startsWith("developer") && it.value instanceof String }.each { k, v ->
