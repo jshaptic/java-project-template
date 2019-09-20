@@ -27,7 +27,7 @@ script:
   
   # Run tests with OpenJDK 8
   - jdk_switcher use openjdk8
-  - ./gradlew check --rerun-tasks -x classes
+  - ./gradlew check --rerun-tasks -x jar -x classes
   
   # Run tests with OracleJDK 8
   - jdk_switcher use oraclejdk8
@@ -42,7 +42,7 @@ after_success:
 # DEPLOY STAGE
 deploy:
   provider: script
-  script: ./gradlew masterDeploy -x jar
+  script: ./gradlew masterDeploy
   skip_cleanup: true
   on:
     branch: master
