@@ -8,11 +8,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Library
+public class ExampleClass
 {
 	private String resource = "some-resource.txt";
 	
-	public boolean someLibraryMethod()
+	public boolean someExampleMethod()
 	{
 		return true;
 	}

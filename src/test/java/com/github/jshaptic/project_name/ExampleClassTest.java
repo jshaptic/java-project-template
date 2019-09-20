@@ -7,26 +7,26 @@ import java.nio.file.FileSystemNotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LibraryTest extends Assert
+public class ExampleClassTest extends Assert
 {
 	@Test
-	public void someLibraryMethodReturnsTrue()
+	public void someExampleMethodReturnsTrue()
 	{
-		Library classUnderTest = new Library();
-		assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+		ExampleClass classUnderTest = new ExampleClass();
+		assertTrue(classUnderTest.someExampleMethod(), "someExampleMethod should return 'true'");
 	}
 	
 	@Test(expectedExceptions = FileSystemNotFoundException.class)
 	public void testReadResourceAsURI() throws IOException, URISyntaxException
 	{
-		Library classUnderTest = new Library();
+		ExampleClass classUnderTest = new ExampleClass();
 		assertEquals(classUnderTest.readResourceAsURI(), "some data");
 	}
 	
 	@Test
 	public void testReadResourceAsStream() throws IOException
 	{
-		Library classUnderTest = new Library();
+		ExampleClass classUnderTest = new ExampleClass();
 		assertEquals(classUnderTest.readResourceAsStream(), "some data");
 	}
 }
