@@ -1,6 +1,6 @@
 task masterDeploy(group: "deployment") {
 	description "Publishes assembled artifacts to JFrog's OSS Artifactory"
-	if (System.env['CI'] == true && System.env['TRAVIS'] == true)
+	if (System.getenv('CI') == "true" && System.getenv('TRAVIS') == "true")
 		dependsOn artifactoryPublish
 	else 
 		doLast {
@@ -10,7 +10,7 @@ task masterDeploy(group: "deployment") {
 
 task productionDeploy(group: "deployment") {
 	description "Publishes production ready artifacts to Bintray repository"
-	if (System.env['CI'] == true && System.env['TRAVIS'] == true)
+	if (System.getenv('CI') == "true" && System.getenv('TRAVIS') == "true")
 		dependsOn bintrayUpload
 	else
 		doLast {
