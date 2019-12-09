@@ -4,16 +4,27 @@ task masterDeploy(group: "deployment") {
 		dependsOn artifactoryPublish
 	else 
 		doLast {
-			println "\r\n!!! This task can be run only in CI environment\r\n"
+			println "\r\n!!! This task is supposed to be run only in CI environment\r\n"
 		}
 }
 
 task productionDeploy(group: "deployment") {
 	description "Publishes production ready artifacts to Bintray repository"
-	if (System.getenv('CI') == "true" && System.getenv('TRAVIS') == "true")
-		dependsOn bintrayUpload
+	if (System.getenv('CI') == "true" && System.getenv('TRAVIS') == "true") {
+		if (!project.version.endsWith("SNAPSHOT")) {
+			dependsOn bintrayUpload
+			doLast {
+				System.setenv('TRAVI_TAG', "v${project.version}")
+			}
+		}
+		else
+			doLast {
+				println "\r\n!!! Project with version '${project.version}' can be deployed only to snapshot repository"
+				println "!!! Most probably SNAPSHOT prefix wasn't removed from version number\r\n"
+			}
+	}
 	else
 		doLast {
-			println "\r\n!!! This task can be run only in CI environment\r\n"
+			println "\r\n!!! This task is supposed to be run only in CI environment\r\n"
 		}
 }
