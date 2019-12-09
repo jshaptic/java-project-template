@@ -1,4 +1,4 @@
-# CI environment
+# CI environment settings
 language: java
 jdk: openjdk11
 dist: trusty
@@ -48,11 +48,24 @@ after_success:
   
 # DEPLOY STAGE
 deploy:
-  provider: script
-  script: ./gradlew masterDeploy -x javadoc -x jar -x classes
-  skip_cleanup: true
-  on:
-    branch: master
+  # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
+  - provider: script
+    script: ./gradlew masterDeploy -x javadoc -x jar -x classes
+    skip_cleanup: true
+    on:
+      branch: master
+  
+  # Production branch will be deployed to Bintray repository and then if needed can be manually deployed to Maven Central
+  - provider: script
+    script: ./gradlew productionDeploy -x javadoc -x jar -x classes
+    # TODO:
+    # 1) add tag to GH
+    # 3) upload artifacts to GH
+    # 4) update release notes on GH
+    # 5) verify Javadoc access 
+    skip_cleanup: true
+    on:
+     branch: production
 
 # RELEASE STAGE
 
