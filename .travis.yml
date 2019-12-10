@@ -6,6 +6,8 @@ dist: trusty
 # Encrypted global secret variables (passwords and keys)
 env:
   global:
+    - DEV_BRANCH=master
+    - PROD_BRANCH=production
     - secure: 4FwU7Ap/6xXZ7k+S7TDWtyeGKhEZmym+X0f4k6iO7vTYWRMJeDl07pFoPSPmA2HvjPT3lp7+sCtoXr0uFngRM1yKK6fuaMQrkORgV0lL8SsLlxPwzCtPOl8vB7szQ4qPCyTSm/EKMGwSSQbrc9GQ5/Rf/wza0Ucuvgu2IhDseN8Wz+taODcHuAHP4tvJv427Tf35MveT57V+YvMAUi5PYcvUJKMj60g7t7Ab1P6SCXHwIybAhOWOqza+m6NFtc7418bCgp07QqWi5kozFizMVabEu1HTCLJbKq0ND6FB94HEzgIcsAcMLXsVOfjKl4g1w6zUwNL/L5B/5QCWYcOanByAKvUS/QridsF4j2Xzt4ykIIvls2Y0ADh5cn65ZZjov3rYIHKcKEEx6suimOCKxm+vXMlggfaTioS+Di2XK8iuqv7fcFOfR0k95lco3ozkO0UBqWKHqXskKA8GZqbxtHF6D6xF5VyI2hPr4IlVQGzNUV9AMo6MS0fSjla64g9YqaUjYNOB+13W6Ygjg4QKT0G2Awazh08vqcoy2UrgF+artnQnbBUgK9MKzbROziTQ2toA+ItjzligVJqg/N+iidij6t2s5OvW9cNBtQNA2CyHbtiGds3XUzsd4Y5MzDgOFjmth6E8BGef0hxbyTsIeGiHZCHIALdnw2jvTa4jClk=
     - secure: 2mEm9JM4BaWhYJgJr4GU6SOmav2EGkprWggDu8VL4OC+U3CUwggn7f/gS9zIvsMT920vHYMtXME5uZ4xQX2J4d4K3wUm5R+fzATev0s50s3xw9XlfdDMHDrpXSxbRe+cU2M0PeG/x566mgokcVr9XvozbviwSi31kcra5TmM1Qyd2OVRPdT1fVNtD0HLqKaWOfZ8u00RzWjzJbcyjQ8rYTIxC6J8vq6aKBaBnkj1P30rOduxTgHP92Yf+k/KgAh7Z2K6gCo5ntxkqKtoZZjYQpQMaPn+hWQxNmPOW5wYQba6O4ydKQB4p/AYa0tZ2YsvdKXTT9ySLT2ryZ1Q63wwgS6PCiTsVYW5iuidQTH2Wl6gXXhx77hqeobppZYy3pJtE6CiYqtWZfW4QRF4ZzbPnxp9DOlo4B4pokIvQK/jhUCkjBZPdCigytJgHDYtoKRvkIMf2+5DXBpa44yW67WLMAtZnVIJqDllbiFpbiCR5UU+HaTDNJIVzX3yhihd/Y1fXb1W475kr7VdIR6/zs/ZoPjANTLonqpoQIcWrj3A/sTQgGjIg0gpogSBrXvL2Lb9QSKf/DfS0aWJlmb782YGuwxBTEuPvfrdHEi7wYq2sfndNbT+FQyQg6ikiy1K/7vcOlAX9+o+RpES14tdBmWzhMjo8Ik8WmmCOoiF9Yn2c6s=
     - secure: 0ariUS0JWcPx1wJS1fBccMyLhEVwZIVC5dJhPtbSsbDU0PAD3215fVZO6hkR2WS9JRtt9g+oN0WM0QeOef4eEnxunhyJxYgem9xjElR9KogtIJiIV83exDHLh+RzlFkfSVPnBAlGSH90jKvWt17RYKkNJb6ebzgLBCdyur46ye4+A9SJe031kDwOo+gswJiza9lH92dgH4Nlf5dwRWHSFfuZVwPD+MjWLubs9b3hCWLkOwIXYUeqiOgV8cr3m5fKzLMwI3+wzG6YauGa9EK2nZXPWofurOLByMOnunKafVCDN8+KUks6TWlFjoJ36JE4Gp3QdaacGiWH8n3ff8UaqexWNoAzOt7/+DxgWeg+qdMWlObBsUxWvPpRCo+NQiwFMbgwg7Jcg3F9qtEyl7ji2YNrzHjFzPyVSEiGJET/OeXidPIRPABJqIvx/T6DsZkiHXcto9ulcDYwUCPkhqEk0Hlpqe6PfNShSNXWg3m5vyjUqQ6A7dhgzKT9trWeiE0KrFYCFaaYtqSfrmW2Jio+ELvw/9S7TQzO/xnfDjKpcURi8sudm/lluNw8e2yIInEd5mqu9NAAT0ORrXzzdubJWveIr8vKum41GUwF1o0zAGMor4judWTd0fqNKYxFCJpkA4WVDrpsX5nRwDDhUBFVFv6w2KSTGvldo9qXcaFkMUY=
@@ -45,6 +47,8 @@ after_success:
   - export JAVA_HOME=$HOME/openjdk11
   # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
+  # Verify version
+  - ./gradlew verifyVersion
   
 # DEPLOY STAGE
 deploy:
@@ -53,7 +57,7 @@ deploy:
     script: ./gradlew masterDeploy -x javadoc -x jar -x classes
     skip_cleanup: true
     on:
-      branch: master
+      branch: $DEV_BRANCH
   
   # Production branch will be deployed to Bintray repository and then if needed can be manually deployed to Maven Central
   - provider: script

@@ -1,3 +1,15 @@
+task verifyVersion(group: "verification") {
+	description "Verifies current project version"
+	doLast {
+		if (System.getenv('TRAVIS_BRANCH') == System.getenv('PROD_BRANCH')) {
+			if (project.version.endsWith("SNAPSHOT")) {
+				println "\r\n!!! Version format '${project.version}' is not valid for production"
+				println "!!! Most probably SNAPSHOT prefix wasn't removed from version number\r\n"
+			}
+		}
+	}
+}
+
 task masterDeploy(group: "deployment") {
 	description "Publishes assembled artifacts to JFrog's OSS Artifactory"
 	if (System.getenv('CI') == "true" && System.getenv('TRAVIS') == "true")
@@ -14,7 +26,7 @@ task productionDeploy(group: "deployment") {
 		if (!project.version.endsWith("SNAPSHOT")) {
 			dependsOn bintrayUpload
 			doLast {
-				System.setenv('TRAVI_TAG', "v${project.version}")
+				System.setenv('TRAVIS_TAG', "v${project.version}")
 			}
 		}
 		else
