@@ -68,6 +68,8 @@ deploy:
      branch: production
 
 # RELEASE STAGE
+# WHO SHOULD merge master and production branches?
+# How to check that releasing version is a new one? 
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
