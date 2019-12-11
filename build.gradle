@@ -16,7 +16,9 @@ apply from: "gradle/testing.gradle"			// setup testing settings and tasks
 apply from: "gradle/javadoc.gradle"			// setup javadoc settings and tasks
 apply from: "gradle/packaging.gradle"		// setup packaging settings and tasks
 apply from: "gradle/artifactory.gradle"		// setup jfrog artifactory settings and tasks
+apply from: "gradle/bintray.gradle"			// setup jfrog bintray settings and tasks
+apply from: "gradle/deployment.gradle"		// setup deployment tasks
 
 wrapper {
-	gradleVersion = "5.5"
+	gradleVersion = "5.6.2"
 }

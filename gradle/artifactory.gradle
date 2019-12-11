@@ -1,4 +1,5 @@
-// Setup artifactory task, twhich is used to upload snapshot builds to JFrog's OSS Artifactory 
+// Setup artifactory task, which is used to upload snapshot builds to JFrog's OSS Artifactory
+// Credentials are initialized in credentials.gradle file
 artifactory {
 	contextUrl = project.artifactoryContextUrl
     publish {
