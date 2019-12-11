@@ -27,9 +27,11 @@ before_install:
   - sudo service x11-common stop || true
   
 # BUILD STAGE
+
 # This stage is configured automaticaly by Travis CI
   
 # TEST STAGE
+
 script:
   # Run tests with OpenJDK 11
   - ./gradlew check jacocoTestReport --rerun-tasks -x jar -x classes
@@ -51,6 +53,16 @@ after_success:
   - ./gradlew verifyVersion
   
 # DEPLOY STAGE
+
+before_deploy:
+  # Set up git user name and tag production commit
+  if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
+    ./gradlew exportRepoTag
+    git config --local user.email "builds@travis-ci.com"
+    git config --local user.name "Travis CI"
+    git tag $TRAVIS_TAG -a -m "Generated tag from TravisCI"
+  fi
+  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
   - provider: script
@@ -58,7 +70,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: $DEV_BRANCH
-  
+
   # Production branch will be deployed to Bintray repository and then if needed can be manually deployed to Maven Central
   - provider: script
     script: ./gradlew productionDeploy -x javadoc -x jar -x classes
@@ -69,11 +81,19 @@ deploy:
     # 5) verify Javadoc access 
     skip_cleanup: true
     on:
-     branch: production
+      branch: $PROD_BRANCH
+
+  # Production branch will be also deployed to GitHub Releases
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    draft: true
+    on:
+      branch: $PROD_BRANCH
 
 # RELEASE STAGE
-# WHO SHOULD merge master and production branches?
-# How to check that releasing version is a new one? 
+
+# This is a manual stage, which can be trigger by creating a pull request in GitHub repository
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
