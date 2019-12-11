@@ -18,9 +18,9 @@ task verifyVersion(group: "verification") {
 	}
 }
 
-task exportRepoTag {
+task projectVersion(group: "versioning") {
 	doLast {
-		System.setenv('TRAVIS_TAG', "v${project.version}")
+		println "v${project.version}"
 	}
 }
 
