@@ -19,7 +19,4 @@ parsers:
       method: no
       macro: no
 
-comment:
-  layout: "reach,diff,flags,tree"
-  behavior: default
-  require_changes: no
+comment: false
