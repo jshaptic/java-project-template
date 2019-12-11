@@ -1,0 +1,37 @@
+task verifyEnvironment(group: "verification") {
+	description "Verifies current CI environment"
+	doLast {
+		if (System.getenv('CI') != "true" || System.getenv('TRAVIS') != "true") {
+			throw new GradleException("Task is supposed to be run only in CI environment!")
+		}
+	}
+}
+
+task verifyVersion(group: "verification") {
+	description "Verifies current project version"
+	doLast {
+		if (System.getenv('TRAVIS_BRANCH') && System.getenv('TRAVIS_BRANCH') == System.getenv('PROD_BRANCH')) {
+			if (project.version.endsWith("SNAPSHOT")) {
+				throw new GradleException("Version format '${project.version}' is not valid for production. Most probably SNAPSHOT prefix wasn't removed from version number.")
+			}
+		}
+	}
+}
+
+task exportRepoTag {
+	doLast {
+		System.setenv('TRAVIS_TAG', "v${project.version}")
+	}
+}
+
+task masterDeploy(group: "deployment") {
+	description "Publishes assembled artifacts to JFrog's OSS Artifactory"
+	dependsOn verifyEnvironment
+	finalizedBy artifactoryPublish
+}
+
+task productionDeploy(group: "deployment") {
+	description "Publishes production ready artifacts to Bintray repository"
+	dependsOn verifyEnvironment, verifyVersion
+	finalizedBy bintrayUpload
+}
