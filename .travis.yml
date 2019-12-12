@@ -57,12 +57,13 @@ before_deploy:
   # Verify version
   - ./gradlew verifyVersion
   # Set up git user name and tag production commit
-  - if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
-      export TRAVIS_TAG=$(./gradlew -q projectVersion);
-      git config --local user.email "builds@travis-ci.com";
-      git config --local user.name "Travis CI";
-      git tag $TRAVIS_TAG -a -m "Generated tag from TravisCI";
-    fi
+  - |
+if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
+  export TRAVIS_TAG=$(./gradlew -q projectVersion);
+  git config --local user.email "builds@travis-ci.com";
+  git config --local user.name "Travis CI";
+  git tag $TRAVIS_TAG -a -m "Generated tag from TravisCI";
+fi
   # Print some GIT related variables
   - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
   - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
