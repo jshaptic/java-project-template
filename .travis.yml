@@ -59,14 +59,11 @@ before_deploy:
   # Set up git user name and tag production commit
   - |
     if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
-      export TRAVIS_TAG=$(./gradlew -q projectVersion);
-      echo "AAA";
+      export TRAVIS_TAG=$(./gradlew -q printVersionTag);
       git config --local user.email "builds@travis-ci.com";
       echo "BBB";
       git config --local user.name "Travis CI";
-      echo "CCC";
       git tag "$TRAVIS_TAG" -a -m "Generated tag from TravisCI";
-      echo "DDD";
     fi
   # Print some GIT related variables
   - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
