@@ -23,5 +23,7 @@ ext {
 
 // Print Java runtime version
 gradle.taskGraph.whenReady {
-	println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
+	if (!gradle.taskGraph.hasTask(":printVersionTag")) {
+		println "${System.properties['java.runtime.version']} (${System.properties['java.runtime.name']})"
+	}
 }
