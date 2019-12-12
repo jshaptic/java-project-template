@@ -10,7 +10,6 @@ task verifyEnvironment(group: "verification") {
 task verifyVersion(group: "verification") {
 	description "Verifies current project version"
 	doLast {
-		throw new GradleException("TEST")
 		if (System.getenv('TRAVIS_BRANCH') && System.getenv('TRAVIS_BRANCH') == System.getenv('PROD_BRANCH')) {
 			if (project.version.endsWith("SNAPSHOT")) {
 				throw new GradleException("Version format '${project.version}' is not valid for production. Most probably SNAPSHOT prefix wasn't removed from version number.")
