@@ -61,6 +61,7 @@ before_deploy:
     if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
       export TRAVIS_TAG=$(./gradlew -q printVersionTag);
       git config --local user.email "builds@travis-ci.com";
+      echo "BBB";
       git config --local user.name "Travis CI";
       git tag "$TRAVIS_TAG" -a -m "Generated tag from TravisCI";
     fi
