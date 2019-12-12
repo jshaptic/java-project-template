@@ -4,7 +4,7 @@ artifactory {
 	contextUrl = project.artifactoryContextUrl
     publish {
         repository {
-            repoKey = project.artifactoryRepoName
+            repoKey = project.version.endsWith("-SNAPSHOT") ?  project.artifactorySnapshotRepo : project.artifactoryReleaseRepo
             username = project.bintrayUsername
             password = project.bintrayKey
         }
