@@ -18,9 +18,9 @@ task verifyVersion(group: "verification") {
 	}
 }
 
-task projectVersion(group: "versioning") {
+task printVersionTag(group: "versioning") {
 	doLast {
-		println "v${project.version}"
+		println project.vcsTag
 	}
 }
 
