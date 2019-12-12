@@ -11,7 +11,7 @@ bintray {
 		websiteUrl = project.homeUrl
 		issueTrackerUrl = project.issuesUrl
 		vcsUrl = project.scmUrl
-		licenses = project.licenseName
+		licenses = [project.licenseName]
 		labels = project.labels.split(",")
 		publicDownloadNumbers = true
 		githubRepo = project.bintrayGHRepoName
