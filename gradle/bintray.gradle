@@ -10,7 +10,7 @@ bintray {
 		desc = project.projectDescription
 		websiteUrl = project.homeUrl
 		issueTrackerUrl = project.issuesUrl
-		vcsUrl = project.scmUrl
+		vcsUrl = project.bintrayVcsUrl
 		licenses = [project.licenseName]
 		labels = project.labels.split(",")
 		publicDownloadNumbers = true
@@ -21,10 +21,6 @@ bintray {
 			desc = "Version '${project.version}' of the '${project.name}' library"
 			released = new Date()
 			vcsTag = project.vcsTag
-			gpg {
-				sign = true
-				passphrase = project.gpgPassphrase
-			}
 		}
 	}
 }
