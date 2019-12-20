@@ -71,7 +71,7 @@ before_deploy:
   
 # TODO:
 # 1) update release notes on GH
-# aaaa
+# bbbb
 # 3) Sonarcloud?
  
 deploy:
