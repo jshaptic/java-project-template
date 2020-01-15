@@ -1,8 +1,18 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-BASEDIR=$(dirname "$0")
+# exit immediately on error
+set -e
 
-cd $BASEDIR
+# navigate to project root 
+cd $(dirname "$0")/..
+
+# make sure we're on the master branch.
+(git branch | grep -q '* master') || {
+  echo "Release only from the master branch!"
+  exit 1
+}
+
+# release to production branch
 git checkout production
 git merge master --ff-only
 git push

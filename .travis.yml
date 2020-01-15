@@ -26,13 +26,20 @@ before_install:
   - sudo service rsync stop || true
   - sudo service x11-common stop || true
   
-### BUILD STAGE
+#(1) BUILD STAGE
 # This stage is configured automaticaly by Travis CI
   
-### TEST STAGE
+#(2) TEST STAGE
+
+# Prepare and validate data before running anything 
 before_script:
+  # Setup local git user
   - git config --local user.email "builds@travis-ci.com"
   - git config --local user.name "Travis CI"
+  
+  # Verify version
+  - ./scripts/verify-version
+  
 script:
   # Run tests with OpenJDK 11
   - ./gradlew check jacocoTestReport --rerun-tasks -x jar -x classes
@@ -51,13 +58,12 @@ after_success:
   # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
   
-### DEPLOY STAGE
+#(3) DEPLOY STAGE
 before_deploy:
-  # Verify version
-  - ./gradlew verifyVersion
-  # Set up git user name and tag production commit
+  
+  # Set up tag production commit
   - |
-    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
+    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false"]]; then
       export TRAVIS_TAG=$(./gradlew -q printVersionTag);
       git tag "$TRAVIS_TAG" -a -m "Generated tag from TravisCI";
     fi
@@ -94,8 +100,7 @@ deploy:
     on:
       branch: $PROD_BRANCH
 
-### RELEASE STAGE
-
+#(4) RELEASE STAGE
 # This is a manual stage, which can be trigger by creating a pull request in GitHub repository
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
