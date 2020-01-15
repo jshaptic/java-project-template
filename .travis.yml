@@ -2,8 +2,6 @@
 language: java
 jdk: openjdk11
 dist: trusty
-git:
-  depth: false
 
 # Encrypted global secret variables (passwords and keys)
 env:
