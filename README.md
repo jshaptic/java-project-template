@@ -1,6 +1,7 @@
 # java-template-project
 
 [![codecov](https://codecov.io/gh/jshaptic/java-project-template/branch/master/graph/badge.svg)](https://codecov.io/gh/jshaptic/java-project-template)
+[![Build Status](https://travis-ci.com/jshaptic/java-project-template.svg?branch=master)](https://travis-ci.com/jshaptic/java-project-template)
 
 Required step after using this template:
 
