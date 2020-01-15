@@ -1,4 +1,4 @@
-cd %~dp0
+cd %~dp0\..
 git checkout production
 git merge master --ff-only
 git push
