@@ -69,8 +69,7 @@ before_deploy:
   
 # TODO:
 # 1) update release notes on GH
-# bbbb
-# 3) Sonarcloud?
+# 2) Sonarcloud?
  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
