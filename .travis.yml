@@ -35,14 +35,6 @@ before_script:
   - git config --local user.email "builds@travis-ci.com"
   - git config --local user.name "Travis CI"
 script:
-  # Merge release commit back to master
-  - |
-    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" && -z "$TRAVIS_TAG" ]]; then
-      git checkout master;
-      git merge production --ff-only;
-      git push;
-      git checkout production;
-    fi
   # Run tests with OpenJDK 11
   - ./gradlew check jacocoTestReport --rerun-tasks -x jar -x classes
   
