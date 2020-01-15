@@ -60,10 +60,9 @@ after_success:
   
 #(3) DEPLOY STAGE
 before_deploy:
-  
   # Set up tag production commit
   - |
-    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false"]]; then
+    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
       export TRAVIS_TAG=$(./gradlew -q printVersionTag);
       git tag "$TRAVIS_TAG" -a -m "Generated tag from TravisCI";
     fi
