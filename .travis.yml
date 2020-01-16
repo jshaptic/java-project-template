@@ -38,6 +38,8 @@ before_script:
   - git config --local user.name "Travis CI"
   
   # Verify version
+  - git tag -l
+  - git tag -l | grep -q "$tag"
   - ./scripts/verify-version
   
 script:
