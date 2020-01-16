@@ -1,12 +1,11 @@
 #!/bin/bash
 
-version=$(grep "version" gradle.properties | cut -d'=' -f2)
-tag="v${version}"
+tag=$(./gradlew -q printVersionTag)
 
 echo $tag
 if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" ]]; then
-  if [[ "$version" == *-SNAPSHOT ]]; then
-    echo "Version format '${version}' is not valid for production. Most probably SNAPSHOT prefix wasn't removed from version number."
+  if [[ "$tag" == *-SNAPSHOT ]]; then
+    echo "Version format '${tag}' is not valid for production. Most probably SNAPSHOT prefix wasn't removed from version number."
     exit 1
   fi
   (git tag -l | grep -q "$tag") && {
