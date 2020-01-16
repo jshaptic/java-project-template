@@ -69,7 +69,7 @@ after_success:
 
 # Setup release tag
 before_deploy:
-  - ./scripts/create-release-tag
+  - source ./scripts/create-release-tag
 
   
 # TODO:

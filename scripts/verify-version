@@ -2,7 +2,8 @@
 
 tag=$(./gradlew -q printVersionTag)
 
-echo $tag
+echo "Verifying version '${tag}'"
+
 if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" ]]; then
   if [[ "$tag" == *-SNAPSHOT ]]; then
     echo "Version format '${tag}' is not valid for production. Most probably SNAPSHOT prefix wasn't removed from version number."
