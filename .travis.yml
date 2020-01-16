@@ -33,6 +33,13 @@ before_install:
 
 # Prepare and validate data before running anything 
 before_script:
+  # Print some GIT related variables
+  - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
+  - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
+  - echo "TRAVIS_TAG = $TRAVIS_TAG"
+  - echo "TRAVIS_BUILD_NUMBER = $TRAVIS_BUILD_NUMBER"
+  - echo "TRAVIS_COMMIT = $TRAVIS_COMMIT"
+  
   # Setup local git user
   - git config --local user.email "builds@travis-ci.com"
   - git config --local user.name "Travis CI"
@@ -59,19 +66,11 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   
 #(3) DEPLOY STAGE
+
+# Setup release tag
 before_deploy:
-  # Set up tag production commit
-  - |
-    if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-      export TRAVIS_TAG=$(./gradlew -q printVersionTag);
-      git tag "$TRAVIS_TAG" -a -m "Generated tag from TravisCI";
-    fi
-  # Print some GIT related variables
-  - echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
-  - echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
-  - echo "TRAVIS_TAG = $TRAVIS_TAG"
-  - echo "TRAVIS_BUILD_NUMBER = $TRAVIS_BUILD_NUMBER"
-  - echo "TRAVIS_COMMIT = $TRAVIS_COMMIT"
+  - ./scripts/create-release-tag
+
   
 # TODO:
 # 1) update release notes on GH
