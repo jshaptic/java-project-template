@@ -75,6 +75,7 @@ before_deploy:
 # TODO:
 # 1) update release notes on GH
 # 2) Sonarcloud?
+# 3) Upload jar to GH?
  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
@@ -93,8 +94,9 @@ deploy:
 
   # Production branch will be also deployed to GitHub Releases
   - provider: releases
-    api_key: $GITHUB_TOKEN
+    #api_key: $GITHUB_TOKEN
     skip_cleanup: true
+    release_notes_file: CHANGELOG.md
     on:
       branch: $PROD_BRANCH
 
