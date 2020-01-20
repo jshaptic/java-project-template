@@ -64,6 +64,8 @@ after_success:
   - export JAVA_HOME=$HOME/openjdk11
   # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
+  #
+  - export CHANGELOG_BODY=$(jshon -s "$(cat CHANGELOG.md)"))
   
 #(3) DEPLOY STAGE
 
@@ -96,7 +98,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     skip_cleanup: true
-    release_notes_file: CHANGELOG.md
+    body: ${CHANGELOG_BODY}
     on:
       branch: $PROD_BRANCH
 
