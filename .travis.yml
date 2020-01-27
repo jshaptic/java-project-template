@@ -64,9 +64,6 @@ after_success:
   - export JAVA_HOME=$HOME/openjdk11
   # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
-  # Read changelog file
-  - brew install jshon
-  - export CHANGELOG_BODY=$(jshon -s "$(cat CHANGELOG.md)"))
   
 #(3) DEPLOY STAGE
 
@@ -97,9 +94,10 @@ deploy:
 
   # Production branch will be also deployed to GitHub Releases
   - provider: releases
-    api_key: $GITHUB_TOKEN
-    skip_cleanup: true
-    body: ${CHANGELOG_BODY}
+    edge: true
+    token: $GITHUB_TOKEN
+    cleanup: false
+    release_notes_file: CHANGELOG.md
     on:
       branch: $PROD_BRANCH
 
