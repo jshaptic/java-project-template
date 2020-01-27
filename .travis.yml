@@ -64,7 +64,8 @@ after_success:
   - export JAVA_HOME=$HOME/openjdk11
   # Submit code coverage to codecov
   - bash <(curl -s https://codecov.io/bash)
-  #
+  # Read changelog file
+  - brew install jshon
   - export CHANGELOG_BODY=$(jshon -s "$(cat CHANGELOG.md)"))
   
 #(3) DEPLOY STAGE
@@ -76,7 +77,7 @@ before_deploy:
   
 # TODO:
 # 1) update release notes on GH
-# 2) Sonarcloud?
+# 2) Sonarcloud, codeclimate, codebeat, codacy?
 # 3) Upload jar to GH?
  
 deploy:
