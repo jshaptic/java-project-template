@@ -44,7 +44,8 @@ before_script:
   - git config --local user.email "builds@travis-ci.com"
   - git config --local user.name "Travis CI"
   
-  # Verify version
+  # Read and verify version
+  - export PROJECT_VERSION=$(./gradlew -q printVersion)
   - ./scripts/verify-version
   
 script:
@@ -70,6 +71,7 @@ after_success:
 # Setup release tag
 before_deploy:
   - source ./scripts/create-release-tag
+  - source ./scripts/extract-changelog
 
   
 # TODO:
@@ -96,8 +98,10 @@ deploy:
   - provider: releases
     edge: true
     token: $GITHUB_TOKEN
+    name: $PROJECT_VERSION
+    release_notes: $CHANGELOG
+    file: ./build/libs/*
     cleanup: false
-    release_notes_file: CHANGELOG.md
     on:
       branch: $PROD_BRANCH
 
