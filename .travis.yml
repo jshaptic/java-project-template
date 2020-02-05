@@ -46,7 +46,10 @@ before_script:
   
   # Read and verify version
   - export PROJECT_VERSION=$(./gradlew -q printVersion)
-  - ./scripts/verify-version
+  - ./scripts/ci/verify-version.sh
+  
+  # Read and verify changelog
+  - source ./scripts/ci/extract-changelog.sh
   
 script:
   # Run tests with OpenJDK 11
@@ -70,8 +73,7 @@ after_success:
 
 # Create release tag and extract changelog
 before_deploy:
-  - source ./scripts/create-release-tag
-  - source ./scripts/extract-changelog
+  - source ./scripts/ci/create-release-tag.sh
  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
