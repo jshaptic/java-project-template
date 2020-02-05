@@ -1,15 +1,18 @@
 #!/bin/bash
 
-if [[ ! -z "$PROJECT_VERSION" ]]; then
-  if [[ -z "$CHANGELOG" ]]; then
-    CHANGELOG=$(awk '/\[[0-9.]+\]/{if(flag)exit; flag=1} flag' ./CHANGELOG.md)
-	CHANGELOG_TEST=$(printf "$CHANGELOG" | grep "\\[$PROJECT_VERSION\\]")
-    if [[ -z "$CHANGELOG_TEST" ]]; then
-      echo "Changelog for version '${PROJECT_VERSION}' isn't added to CHANGELOG.md file!"
-      exit 1
+if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" ]]; then
+  if [[ ! -z "$PROJECT_VERSION" ]]; then
+    if [[ -z "$CHANGELOG" ]]; then
+      CHANGELOG=$(awk '/\[[0-9.]+\]/{if(flag)exit; flag=1} flag' ./CHANGELOG.md)
+      printf "$CHANGELOG"
+	  CHANGELOG_TEST=$(printf "$CHANGELOG" | grep "\\[$PROJECT_VERSION\\]")
+      if [[ -z "$CHANGELOG_TEST" ]]; then
+        echo "Changelog for version '${PROJECT_VERSION}' isn't added to CHANGELOG.md file!"
+        exit 1
+      fi
     fi
+  else
+    echo "PROJECT_VERSION variable is not defined!"
+    exit 1
   fi
-else
-  echo "PROJECT_VERSION variable is not defined!"
-  exit 1
 fi
