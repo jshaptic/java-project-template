@@ -1,10 +1,15 @@
 #!/bin/bash
 
-if [[ -z "$CHANGELOG" ]]; then
-  CHANGELOG=$(awk '/\[[0-9.]+\]/{if(flag)exit; flag=1} flag' ./CHANGELOG.md)
+if [[ ! -z "$PROJECT_VERSION" ]]; then
+  if [[ -z "$CHANGELOG" ]]; then
+    CHANGELOG=$(awk '/\[[0-9.]+\]/{if(flag)exit; flag=1} flag' ./CHANGELOG.md)
 
-  if [[ ! printf "$CHANGELOG" | grep -q \\[$PROJECT_VERSION\\] ]]; then
-    echo "Changelog for version '${PROJECT_VERSION}' isn't added to CHANGELOG.md file!"
-    exit 1
+    if ! printf "$CHANGELOG" | grep -q \\[$PROJECT_VERSION\\]; then
+      echo "Changelog for version '${PROJECT_VERSION}' isn't added to CHANGELOG.md file!"
+      exit 1
+    fi
   fi
+else
+  echo "PROJECT_VERSION variable is not defined!"
+  exit 1
 fi
