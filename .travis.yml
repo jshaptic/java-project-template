@@ -72,11 +72,6 @@ after_success:
 before_deploy:
   - source ./scripts/create-release-tag
   - source ./scripts/extract-changelog
-
-  
-# TODO:
-# 1) update release notes on GH
-# 2) Sonarcloud, codeclimate, codebeat, codacy?
  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
@@ -105,7 +100,7 @@ deploy:
       branch: $PROD_BRANCH
 
 #(4) RELEASE STAGE
-# This is a manual stage, which can be trigger by creating a pull request in GitHub repository
+# This is a manual stage, which can be trigger by creating a pull request in GitHub and manually running scripts/release command 
 
 # Used to avoid uploading the cache after every build, see https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
