@@ -18,6 +18,12 @@ task verifyVersion(group: "verification") {
 	}
 }
 
+task printVersion(group: "versioning") {
+	doLast {
+		println project.version
+	}
+}
+
 task printVersionTag(group: "versioning") {
 	doLast {
 		println project.vcsTag
