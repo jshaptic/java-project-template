@@ -1,24 +1,27 @@
 # Changelog
 
-## 0.0.2 (2020-02-05)
-
-### New
-- Added TODO
-
 ## 0.0.1 (2020-02-05)
 
-- Initial version created
+Initial version created
 
-## CHANGELOG TEMPLATE
+## CHANGELOG TEMPLATE (YYYY-MM-DD)
+
+XXX XXX XXX
 
 ### New
 
+- XXX
+- XXX
 - XXX
 
 ### Changed
 
 - XXX
+- XXX
+- XXX
 
 ### Fixed
 
+- XXX
+- XXX
 - XXX
