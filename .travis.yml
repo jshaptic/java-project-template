@@ -68,7 +68,7 @@ after_success:
   
 #(3) DEPLOY STAGE
 
-# Setup release tag
+# Create release tag and extract changelog
 before_deploy:
   - source ./scripts/create-release-tag
   - source ./scripts/extract-changelog
