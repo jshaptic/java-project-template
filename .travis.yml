@@ -77,7 +77,6 @@ before_deploy:
 # TODO:
 # 1) update release notes on GH
 # 2) Sonarcloud, codeclimate, codebeat, codacy?
-# 3) Upload jar to GH?
  
 deploy:
   # All changes from master branch will be deployed to JFrog's OSS Artifactory repository
