@@ -12,5 +12,5 @@ Required step after using this template:
 3) Encrypt secret environment variables
 
 ## TODO
-- Sonarcloud, codeclimate, codebeat, codacy?
+- Sonarcloud, codeclimate, codebeat, codacy? Most probably clodeclimate
 - Switch from Travis to GitHub Actions?
