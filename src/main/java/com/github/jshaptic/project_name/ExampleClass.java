@@ -19,6 +19,7 @@ public class ExampleClass
 	
 	public boolean someUntestedMethod()
 	{
+		System.out.println("Hello world");
 		return true;
 	}
 	
