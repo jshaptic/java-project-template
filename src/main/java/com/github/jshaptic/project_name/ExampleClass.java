@@ -17,6 +17,11 @@ public class ExampleClass
 		return true;
 	}
 	
+	public boolean someUntestedMethod()
+	{
+		return true;
+	}
+	
 	public String readResourceAsURI() throws IOException, URISyntaxException
 	{
 		return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
