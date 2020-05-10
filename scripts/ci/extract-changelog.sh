@@ -10,7 +10,7 @@ if [[ "$TRAVIS_BRANCH" == "$PROD_BRANCH" ]]; then
         exit 1
       fi
       CHANGELOG=$(printf "$CHANGELOG" | sed -n '1d;p')
-      printf "$CHANGELOG"
+      printf "%s\n" "$CHANGELOG"
     fi
   else
     echo "PROJECT_VERSION variable is not defined!"

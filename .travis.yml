@@ -71,7 +71,7 @@ after_success:
   
 #(3) DEPLOY STAGE
 
-# Create release tag and extract changelog
+# Create release tag
 before_deploy:
   - source ./scripts/ci/create-release-tag.sh
  
