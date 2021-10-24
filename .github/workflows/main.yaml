@@ -20,9 +20,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: |
-          ./gradlew build javadoc jacocoTestReport
-          bash <(curl -s https://codecov.io/bash)
+        run: ./gradlew build javadoc jacocoTestReport
       - name: Cache build
         uses: actions/cache@v2
         with:
@@ -76,17 +74,18 @@ jobs:
       - name: Test
         run: ./gradlew test -x classes -x jar
 
-  # coverage:
-  #   needs: build
-  #   runs-on: ubuntu-latest
+  coverage:
+    needs: build
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Get build
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: build
-  #         key: build
-  #     - name: Publish coverage report
-  #       uses: codecov/codecov-action@v2
-  #       with:
-  #         fail_ci_if_error: true
+    steps:
+      - name: Get build
+        uses: actions/cache@v2
+        with:
+          path: build
+          key: build
+      - name: Publish coverage report
+        uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true
+          verbose: true
