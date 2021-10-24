@@ -1,7 +1,7 @@
 test {
 	// Rearrange test classpath, add compiled JAR instead of main classes directory
 	if (project.getProperties().get("RUN_MODE") == "CI") {
-		classpath = files(jar.destinationDir) + sourceSets.test.output + configurations.testRuntimeClasspath
+		classpath = files(jar.archiveFile) + sourceSets.test.output + configurations.testRuntimeClasspath
 	}
 	
 	// Select testing framework
