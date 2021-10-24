@@ -47,5 +47,11 @@ jobs:
           cache: 'gradle'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Cache target
+        uses: actions/cache@v2
+        with:
+          path: |
+            build
+          key: cached-build
       - name: Build with Gradle
         run: ./gradlew check javadoc jacocoTestReport -x jar -x classes
