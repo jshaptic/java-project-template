@@ -79,6 +79,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - name: Get build
         uses: actions/cache@v2
         with:
@@ -88,5 +89,3 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           fail_ci_if_error: true
-          flags: unittests
-          verbose: true
