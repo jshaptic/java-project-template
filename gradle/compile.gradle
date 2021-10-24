@@ -9,7 +9,5 @@ compileJava {
 compileTestJava {
 	options.encoding = project.defaultEncoding
 	options.compilerArgs += ["-Xlint:-options"]
-	if (project.getProperties().get("RUN_MODE") == "CI") {
-		classpath = files(jar.archiveFile) + configurations.testRuntimeClasspath
-	}
+	classpath = files(jar.archiveFile) + configurations.testRuntimeClasspath
 }
