@@ -27,6 +27,7 @@ jobs:
         with:
           path: |
             build
+          key: cached-build
   test:
     runs-on: ubuntu-latest
 
