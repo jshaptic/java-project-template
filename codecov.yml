@@ -20,3 +20,6 @@ parsers:
       macro: no
 
 comment: false
+
+fixes:
+  - "::src/main/java/" 
