@@ -1,9 +1,10 @@
-name: Release CI
+name: Development CI
 
 on:
   push:
     branches:
-      - 'main'
+      - '!main'
+  pull_request:
 
 jobs:
   build:
@@ -67,3 +68,21 @@ jobs:
         run: chmod +x gradlew
       - name: Test
         run: ./gradlew test -x classes -x jar
+
+  coverage-report:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: 'gradle'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew jacocoTestReport
+      - name: Publish coverage report
+        uses: codecov/codecov-action@v2
