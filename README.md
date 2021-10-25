@@ -15,3 +15,4 @@ Required step after using this template:
 - Sonarcloud, codeclimate, codebeat, codacy? Most probably clodeclimate
 - Switch from Travis to GitHub Actions
 - Add checkstyle
+- bla bla
