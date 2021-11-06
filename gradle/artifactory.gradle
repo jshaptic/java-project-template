@@ -1,15 +1,19 @@
-// Setup artifactory task, which is used to upload snapshot builds to JFrog's OSS Artifactory
-// Credentials are initialized in credentials.gradle file
 artifactory {
-	contextUrl = project.artifactoryContextUrl
+	contextUrl = System.getenv("ARTIFACTORY_CONTEXTURL")
     publish {
         repository {
-            repoKey = project.version.endsWith("-SNAPSHOT") ?  project.artifactorySnapshotRepo : project.artifactoryReleaseRepo
-            username = project.bintrayUsername
-            password = project.bintrayKey
+            repoKey = "default-gradle-release-local"
+            username = System.getenv("ARTIFACTORY_USER")
+            password = System.getenv("ARTIFACTORY_CONTEXTURL")
+            maven = true
         }
-        defaults {
-            publications("mavenJava")
+    }
+    resolve {
+        repository {
+            repoKey = "default-gradle-release"
+            username = System.getenv("ARTIFACTORY_USER")
+            password = System.getenv("ARTIFACTORY_CONTEXTURL")
+            maven = true
         }
     }
 }

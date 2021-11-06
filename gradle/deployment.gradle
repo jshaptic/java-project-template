@@ -29,15 +29,3 @@ task printVersionTag(group: "versioning") {
 		println project.vcsTag
 	}
 }
-
-task masterDeploy(group: "deployment") {
-	description "Publishes assembled artifacts to JFrog's OSS Artifactory"
-	dependsOn verifyEnvironment
-	finalizedBy artifactoryPublish
-}
-
-task productionDeploy(group: "deployment") {
-	description "Publishes production ready artifacts to Bintray repository"
-	dependsOn verifyEnvironment, verifyVersion
-	finalizedBy bintrayUpload
-}

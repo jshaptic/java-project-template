@@ -1,4 +1,4 @@
-name: development
+name: ci
 
 on:
   push:
@@ -89,8 +89,9 @@ jobs:
       - name: Publish coverage report
         uses: codecov/codecov-action@v2
 
-  deploy:
-    if: startsWith(github.ref, 'refs/tags/')
+  release:
+    #if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref == 'refs/heads/main'
     needs: [test, test-with-java-8]
     runs-on: ubuntu-latest
     steps:
@@ -108,7 +109,10 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Bintray upload
-        run: ./gradlew bintrayUpload -x javadoc -x classes -x jar
-      - name: Github release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        run: ./gradlew artifactoryPublish -x javadoc -x classes -x jar
+        env:
+          ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORYCONTEXTURL }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORYPASSWORD }}
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORYUSER }}
+      # - name: Github release
+      #   uses: softprops/action-gh-release@v1
