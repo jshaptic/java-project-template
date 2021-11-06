@@ -19,6 +19,7 @@ public class ExampleClass
 	
 	public boolean someUntestedMethod()
 	{
+		int a = 2 + 2;
 		return true;
 	}
 	
