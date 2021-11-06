@@ -14,4 +14,4 @@ Required step after using this template:
 ## TODO
 - Sonarcloud, codeclimate, codebeat, codacy? Most probably clodeclimate
 - Switch from Travis to GitHub Actions
-- Add checkstyle
+- Add checkstyle  
