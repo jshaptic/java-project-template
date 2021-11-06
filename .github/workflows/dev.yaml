@@ -72,7 +72,7 @@ jobs:
   # add some other tests here
 
   generate-code-coverage:
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/main' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
