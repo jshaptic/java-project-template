@@ -1,5 +1,5 @@
 codecov:
-  require_ci_to_pass: yes
+  require_ci_to_pass: true
 
 coverage:
   precision: 2
@@ -7,9 +7,9 @@ coverage:
   range: "70...100"
 
   status:
-    project: yes
-    patch: no
-    changes: no
+    project: true
+    patch: false
+    changes: false
 
 parsers:
   gcov:
