@@ -7,6 +7,9 @@ artifactory {
             password = System.getenv("ARTIFACTORY_CONTEXTURL")
             maven = true
         }
+        defaults {
+            publications("mavenJava")
+        }
     }
     resolve {
         repository {
