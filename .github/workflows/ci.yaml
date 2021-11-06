@@ -1,4 +1,4 @@
-name: ci
+name: pipeline
 
 on:
   push:
@@ -91,8 +91,8 @@ jobs:
 
   release:
     #if: startsWith(github.ref, 'refs/tags/')
-    if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [test, test-with-java-8]
+    if: github.ref == 'refs/heads/main'
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
