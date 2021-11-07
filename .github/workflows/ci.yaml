@@ -108,11 +108,10 @@ jobs:
           key: jar
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Bintray upload
-        run: ./gradlew artifactoryPublish -x javadoc -x classes -x jar
+      - name: Publish to Maven Central
+        run: ./gradlew publishToSonatype closeSonatypeStagingRepository -x javadoc -x classes -x jar
         env:
-          ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORYCONTEXTURL }}
-          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORYPASSWORD }}
-          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORYUSER }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
       # - name: Github release
       #   uses: softprops/action-gh-release@v1
