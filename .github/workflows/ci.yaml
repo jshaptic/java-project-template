@@ -108,7 +108,6 @@ jobs:
       - name: Changelogs
         uses: mindsers/changelog-reader-action@v2
         with:
-          validation_depth: 10
           version: ${{ steps.tag_name.outputs.current_version }}
       # - name: Get jars
       #   uses: actions/cache@v2
