@@ -51,7 +51,7 @@ jobs:
         run: ./gradlew test -x jar -x javadocJar -x sourcesJar
 
   test-with-java-8:
-    if:  github.event_name == 'pull_request')
+    if: github.event_name == 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -75,7 +75,7 @@ jobs:
   # place to add some other tests
 
   generate-code-coverage:
-    if: ${{ github.event_name == 'pull_request' || github.ref == 'refs/heads/main' }}
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
