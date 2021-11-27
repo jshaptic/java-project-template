@@ -89,43 +89,34 @@ jobs:
       - name: Publish coverage report
         uses: codecov/codecov-action@v2
 
-  release:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: [test, test-with-java-8]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
-      # TODO: verify version in changelog.md
-      - name: Get version from tag
-        id: tag_name
-        run: |
-          echo ::set-output name=current_version::${GITHUB_REF#refs/tags/v}
-      - name: Changelogs
-        uses: mindsers/changelog-reader-action@v2
-        with:
-          version: ${{ steps.tag_name.outputs.current_version }}
-      # - name: Get jars
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: build/libs
-      #     key: jars
-      # - name: Grant execute permission for gradlew
-      #   run: chmod +x gradlew
-      # - name: Publish to Maven Central
-      #   run: ./gradlew versionDisplay
-      # - name: Publish to Maven Central
-      #   run: ./gradlew publishToSonatype closeSonatypeStagingRepository -x jar -x javadocJar -x sourcesJar
-      #   env:
-      #     GPG_KEY: ${{ secrets.GPG_KEY }}
-      #     GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-      #     MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-      #     MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-      # - name: Github release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: build/libs/*.jar
+  # release:
+  #   if: startsWith(github.ref, 'refs/tags/')
+  #   needs: [test, test-with-java-8]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-java@v2
+  #       with:
+  #         java-version: '11'
+  #         distribution: 'adopt'
+  #         cache: 'gradle'
+  #     - name: Get jars
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: build/libs
+  #         key: jars
+  #     - name: Grant execute permission for gradlew
+  #       run: chmod +x gradlew
+  #     - name: Publish to Maven Central
+  #       run: ./gradlew versionDisplay
+  #     - name: Publish to Maven Central
+  #       run: ./gradlew publishToSonatype closeSonatypeStagingRepository -x jar -x javadocJar -x sourcesJar
+  #       env:
+  #         GPG_KEY: ${{ secrets.GPG_KEY }}
+  #         GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+  #         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+  #         MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+  #     - name: Github release
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         files: build/libs/*.jar

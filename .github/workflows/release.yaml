@@ -2,19 +2,31 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
+      version:
+        description: 'Release Version'
         required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
 
 jobs:
-  say_hello:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Hello ${{ github.event.inputs.name }}!"
-          echo "- in ${{ github.event.inputs.home }}!"
+      - uses: actions/checkout@v2
+      - name: Read changelogs
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          version: ${{ github.event.inputs.version }}
+      - name: Setup JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: 'gradle'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Assemble jars
+        run: ./gradlew jar javadocJar sourcesJar
+      - name: Create new release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/*.jar
+          tag_name: ${{ github.event.inputs.version }}
