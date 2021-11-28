@@ -37,7 +37,7 @@ jobs:
       - name: Assemble jars
         run: ./gradlew -Pversion=${{ github.event.inputs.version }} jar javadocJar sourcesJar
       - name: Publish to Maven Central
-        run: ./gradlew publishToSonatype closeSonatypeStagingRepository -x jar -x javadocJar -x sourcesJar
+        run: ./gradlew -Pversion=${{ github.event.inputs.version }} publishToSonatype closeSonatypeStagingRepository -x jar -x javadocJar -x sourcesJar
         env:
           GPG_KEY: ${{ secrets.GPG_KEY }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
