@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Check if version tag already exists
         id: tag
+        shell: bash
         run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ github.event.inputs.version }}" && echo "::set-output name=exists::1" || echo "::set-output name=exists::0"
       - name: Fail if version tag already exists
         if: ${{ steps.tag.outputs.exists == 1 }}
