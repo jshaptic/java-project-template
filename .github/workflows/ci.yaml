@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: build/libs
-          key: jars
+          key: jars-{{ github.sha }}
 
   test:
     needs: build
@@ -44,7 +44,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: build/libs
-          key: jars
+          key: jars-{{ github.sha }}
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Test
@@ -66,7 +66,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: build/libs
-          key: jars
+          key: jars-{{ github.sha }}
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Test
