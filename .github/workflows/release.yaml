@@ -35,7 +35,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Assemble jars
-        run: ./gradlew jar javadocJar sourcesJar
+        run: ./gradlew -Pversion=${{ github.event.inputs.version }} jar javadocJar sourcesJar
       - name: Publish to Maven Central
         run: ./gradlew publishToSonatype closeSonatypeStagingRepository -x jar -x javadocJar -x sourcesJar
         env:
