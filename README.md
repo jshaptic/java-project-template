@@ -1,6 +1,5 @@
 # java-template-project
 
-[![Build Status](https://travis-ci.com/jshaptic/java-project-template.svg?branch=master)](https://travis-ci.com/jshaptic/java-project-template)
 [![codecov](https://codecov.io/gh/jshaptic/java-project-template/branch/master/graph/badge.svg)](https://codecov.io/gh/jshaptic/java-project-template)
 [![javadoc](https://javadoc.io/badge2/com.github.jshaptic/java-project-template/javadoc.svg)](https://javadoc.io/doc/com.github.jshaptic/java-project-template)
 
@@ -12,5 +11,4 @@ Required step after using this template:
 
 ## TODO
 - Sonarcloud, codeclimate, codebeat, codacy? Most probably clodeclimate
-- Switch from Travis to GitHub Actions
 - Add checkstyle
