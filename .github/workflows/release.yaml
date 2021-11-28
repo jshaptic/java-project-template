@@ -10,15 +10,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Check if version tag already exists
         id: tag
-        run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ github.event.inputs.version }}" && echo "::set-output name=exists::0" || echo "::set-output name=exists::1"
+        run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ github.event.inputs.version }}" && echo "::set-output name=exists::1" || echo "::set-output name=exists::0"
       - name: Fail if version tag already exists
         if: steps.tag.outputs.exists == 1
         uses: actions/github-script@v3
         with:
           script: core.setFailed('Version v${{ github.event.inputs.version }} was already released')
-      - uses: actions/checkout@v2
       - name: Read changelogs
         id: changelogs
         uses: mindsers/changelog-reader-action@v2
