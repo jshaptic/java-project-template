@@ -5,9 +5,9 @@
 
 Required step after using this template:
 
-1) Don't forget to commit execution flag on gradlew file: `chmod +x gradlew`
+1) Replace everywhere "java_project_name" and "java-project-name" with release project name
 2) Setup codecov.io
-3) Encrypt secret environment variables
+3) Setup secret environment variables
 
 ## TODO
 - Sonarcloud, codeclimate, codebeat, codacy? Most probably clodeclimate

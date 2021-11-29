@@ -1,4 +1,4 @@
-package com.github.jshaptic.project_name;
+package com.github.jshaptic.java_project_template;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ExampleClass
+public class SomeClass
 {
 	private String resource = "some-resource.txt";
 	
-	public boolean someExampleMethod()
+	public boolean someMethod()
 	{
 		return true;
 	}
