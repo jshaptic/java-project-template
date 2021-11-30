@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release Version'
+        description: "Release Version"
         required: true
 
 jobs:
@@ -29,9 +29,9 @@ jobs:
       - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Assemble jars
@@ -49,4 +49,3 @@ jobs:
           tag_name: v${{ github.event.inputs.version }}
           body: ${{ steps.changelogs.outputs.changes }}
           files: build/libs/*.jar
-          

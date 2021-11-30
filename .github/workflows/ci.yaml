@@ -3,7 +3,7 @@ name: ci-pipeline
 on:
   push:
   pull_request:
-    types: 
+    types:
       - opened
       - reopened
       - synchronize
@@ -16,9 +16,9 @@ jobs:
       - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Assemble jars
@@ -37,9 +37,9 @@ jobs:
       - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Get jars
         uses: actions/cache@v2
         with:
@@ -59,9 +59,9 @@ jobs:
       - name: Setup JDK 8
         uses: actions/setup-java@v2
         with:
-          java-version: '8'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "8"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Get jars
         uses: actions/cache@v2
         with:
@@ -71,7 +71,7 @@ jobs:
         run: chmod +x gradlew
       - name: Test
         run: ./gradlew test -x jar -x javadocJar -x sourcesJar
-  
+
   # place to add some other tests
 
   generate-code-coverage:
@@ -82,9 +82,9 @@ jobs:
       - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Generate jacoco report
@@ -100,9 +100,9 @@ jobs:
       - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: 'gradle'
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Generate jacoco report

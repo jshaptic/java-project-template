@@ -1,0 +1,4 @@
+plugins:
+  checkstyle:
+    config:
+      file: "checkstyle.xml"
