@@ -1,4 +1,4 @@
-package com.github.jshaptic.java_project_template;
+package com.github.jshaptic.project;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class SomeClass {
     return true;
   }
 
-  public String readResourceAsURI() throws IOException, URISyntaxException {
+  public String readResourceAsUri() throws IOException, URISyntaxException {
     return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
   }
 
