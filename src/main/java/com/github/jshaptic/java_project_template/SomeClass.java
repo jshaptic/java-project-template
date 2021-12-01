@@ -8,34 +8,27 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class SomeClass
-{
-	private String resource = "some-resource.txt";
-	
-	public boolean someMethod()
-	{
-		return true;
-	}
-	
-	public boolean someUntestedMethod()
-	{
-		return true;
-	}
-	
-	public String readResourceAsURI() throws IOException, URISyntaxException
-	{
-		return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
-	}
-	
-	public String readResourceAsStream() throws IOException
-	{
-		try
-		(
-			InputStream in = ClassLoader.getSystemResourceAsStream(resource);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		)
-		{
-			return reader.readLine();
-		}
-	}
+public class SomeClass {
+
+  private String resource = "some-resource.txt";
+
+  public boolean someMethod() {
+    return true;
+  }
+
+  public boolean someUntestedMethod() {
+    return true;
+  }
+
+  public String readResourceAsURI() throws IOException, URISyntaxException {
+    return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
+  }
+
+  public String readResourceAsStream() throws IOException {
+    try (InputStream in = ClassLoader.getSystemResourceAsStream(resource);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));) {
+      return reader.readLine();
+    }
+  }
+
 }
