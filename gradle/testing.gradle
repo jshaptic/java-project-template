@@ -12,10 +12,10 @@ test {
 	}
 }
 
-// Setup jacoco task, reports should be generated in XML format, which is required for codecov task
+// Setup jacoco task
 jacocoTestReport {
 	dependsOn test
 	reports {
-		xml.enabled = true
-    }
+		xml.required = true
+  }
 }
