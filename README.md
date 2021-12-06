@@ -10,3 +10,5 @@ Required step after using this template:
 1. Replace everywhere "java_project_name" and "java-project-name" with release project name
 2. Setup Code Climate
 3. Setup secret environment variables
+
+test pull request
