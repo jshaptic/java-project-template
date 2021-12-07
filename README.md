@@ -4,6 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/08180ff0281877bd59a3/test_coverage)](https://codeclimate.com/github/jshaptic/java-project-template/test_coverage)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.jshaptic/java-project-template)
 [![javadoc](https://javadoc.io/badge2/com.github.jshaptic/java-project-template/javadoc.svg)](https://javadoc.io/doc/com.github.jshaptic/java-project-template)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Required steps after using this template:
 
