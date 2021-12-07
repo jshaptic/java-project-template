@@ -6,6 +6,9 @@ import java.nio.file.FileSystemNotFoundException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Some class test description.
+ */
 public class SomeClassTest extends Assert {
 
   @Test
