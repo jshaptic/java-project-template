@@ -8,6 +8,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Some class description.
+ */
 public class SomeClass {
 
   private String resource = "some-resource.txt";
@@ -24,6 +27,9 @@ public class SomeClass {
     return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
   }
 
+  /**
+   * Some method description.
+   */
   public String readResourceAsStream() throws IOException {
     try (InputStream in = ClassLoader.getSystemResourceAsStream(resource);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));) {
