@@ -1,4 +1,4 @@
-# java-template-project
+# java-project-template
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/08180ff0281877bd59a3/maintainability)](https://codeclimate.com/github/jshaptic/java-project-template/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/08180ff0281877bd59a3/test_coverage)](https://codeclimate.com/github/jshaptic/java-project-template/test_coverage)
