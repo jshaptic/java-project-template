@@ -8,7 +8,7 @@
 
 Required steps after using this template:
 
-1. Replace "java-project-name" with real project name
+1. Replace "java-project-template" with real project name
 2. Setup Code Climate
 3. Setup following repository secrets:
    - CC_TEST_REPORTER_ID - Code Climate ID
