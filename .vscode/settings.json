@@ -2,7 +2,7 @@
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive",
   "java.checkstyle.configuration": "checkstyle.xml",
   "java.checkstyle.version": "8.39",
   "java.format.settings.url": "formatter.xml"
