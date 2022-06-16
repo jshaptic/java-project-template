@@ -15,22 +15,22 @@ public class SomeClass {
 
   private String resource = "some-resource.txt";
 
-  /** some method */
+  /** some method. */
   public boolean someMethod() {
     return true;
   }
 
-  /** some untested method */
+  /** some untested method. */
   public boolean someUntestedMethod() {
     return true;
   }
 
-  /** read resource as uri */
+  /** read resource as uri. */
   public String readResourceAsUri() throws IOException, URISyntaxException {
     return new String(Files.readAllBytes(Paths.get(ClassLoader.getSystemClassLoader().getResource(resource).toURI())));
   }
 
-  /** read resource as stream */
+  /** read resource as stream. */
   public String readResourceAsStream() throws IOException {
     try (InputStream in = ClassLoader.getSystemResourceAsStream(resource);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));) {

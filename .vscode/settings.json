@@ -2,6 +2,11 @@
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "java.codeGeneration.useBlocks": true,
+  "java.completion.importOrder": ["#", ""],
   "java.configuration.updateBuildConfiguration": "interactive",
   "java.checkstyle.configuration": "checkstyle.xml",
   "java.checkstyle.version": "8.39",
