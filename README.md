@@ -19,3 +19,36 @@ Required steps after using this template:
    - MAVEN_USERNAME - username of the Sonatype Nexus Repository
    - MAVEN_PASSWORD - password of the Sonatype Nexus Repository
 5. Setup main branch protection rules
+
+## How to sign with PGP/GPG
+
+In order to use automatically your signature at the release pipeline you need to have 3 things:
+
+- Already existing signature or generate new one
+- Retrieve signature private key
+- Add signature data to the pipeline secrets
+
+### Generate new signature
+
+> **Note**
+> Skip this part if you already have PGP/GPG signature and you can use it
+
+1. **Install GnuPG tool**  
+   On `Windows` you can install [Gpg4win](https://gpg4win.org) tool  
+   On `MacOS` you can use homebrew to install it: `brew install gnupg`  
+   On `Linux` if it's not installed by default just use any available package manager, e.g. on Ubuntu it is: `sudo apt-get install gnupg`
+2. **Generate signature**  
+   Execute command `gpg --gen-key` and fill all required parameters, it will also ask for secret passphrase, you will need it in the next steps
+3. **Get signature public key**  
+   Execute command `gpg --list-keys` and copy long string containing numbers and letters, that's your signature public key
+4. **Distribute signature public key**  
+   Execute command `gpg --keyserver hkp://pgp.mit.edu --send-keys INSERT_YOUR_KEY`
+
+### Retrieve signature private key
+
+> **Note**
+> You need to have access to computer, where your signature was generated
+
+To be able to use your private signature key in release pipeline it needs to be ascii-armored, to do it execute command `gpg --armor --export-secret-keys`
+
+### Add signature data to the pipeline secrets
