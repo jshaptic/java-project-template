@@ -3,10 +3,10 @@ name: ci-pipeline
 on:
   push:
     paths-ignore:
-      - .vscode/**
-      - .gitignore
-      - *.md
-      - LICENSE
+      - ".vscode/**"
+      - ".gitignore"
+      - "*.md"
+      - "LICENSE"
   pull_request:
     types:
       - opened
